@@ -34,8 +34,8 @@
         </nav>
     </div>
 
-    <div class="hero-container " id="hero-sec">
-        <div class="container-fluid ">
+    <div class="hero-container" id="hero-sec">
+        <div class="container-fluid">
             <div class="row d-flex">
                 <div class="col align-middle">
                     <div class="px-2 py-2">
@@ -64,22 +64,33 @@
                     </div>
                 </div>
             </div>
+
+            <div class="row d-flex">
+                <div class="col-12">
+                    @if(session()->has('success'))
+                        <div class="alert alert-primary w-100" role="alert">
+                            {{ session('success') }}
+                        </div>
+                    @elseif(session()->has('error'))
+                        <div class="alert alert-danger w-100" role="alert">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
 
-        @if(session()->has('message'))
-            <div class="alert alert-success" role="alert">
-                {{ session('message') }}
-            </div>
-        @endif
         {{-- Check Balanc Modal --}}
         <section class="modal hidden" id="modalOne">
-            <div class="flex">
-                <button class="btn-close" id="check-close">⨉</button>
+            <div>
+                <button class="btn bg-success bg-gradient btn-sm rounded-circle" id="check-close">
+                    <i class="fa-solid fa-times m-2"></i>
+                </button>
             </div>
             <div>
                 <h3>Your Balance</h3>
                 <p class="text-center">
-                    3.333JD
+                    {{ number_format(auth()->user()->balance) }} JD
                 </p>
             </div>
         </section>
@@ -90,9 +101,12 @@
 
         {{-- Deposit Modal --}}
         <section class="modal hidden" id="modalTwo">
-            <div class="flex">
-                <button class="btn-close" id="deposit-close">⨉</button>
+            <div>
+                <button class="btn bg-success bg-gradient btn-sm rounded-circle" id="deposit-close">
+                    <i class="fa-solid fa-times m-2"></i>
+                </button>
             </div>
+
             <div>
                 <h3>Deposit</h3>
             </div>
@@ -100,8 +114,10 @@
             <form action="{{ route('deposit') }}" method="POST">
                 @csrf
 
-                <input class="form-control" name="value" type="number" placeholder="Enter the amount" required />
-                <button class="btn btn-outline-primary mt-3">Deposit</button>
+                <input class="form-control" name="value" type="number" placeholder="Enter the amount" required min="1" />
+                <div class="w-100 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary mt-3">Deposit</button>
+                </div>
             </form>
         </section>
 
@@ -111,16 +127,24 @@
 
         {{-- Withdraw Modal --}}
         <section class="modal hidden" id="modalThree">
-            <div class="flex">
-                <button class="btn-close" id="withdraw-close">⨉</button>
+            <div>
+                <button class="btn bg-success bg-gradient btn-sm rounded-circle" id="withdraw-close">
+                    <i class="fa-solid fa-times m-2"></i>
+                </button>
             </div>
+
             <div>
                 <h3>Withdraw</h3>
-
             </div>
 
-            <input type="text" placeholder="Enter the amount" />
-            <button class="btn btn-outline-primary mt-3">Withdraw</button>
+            <form action="{{ route('withdraw') }}" method="POST">
+                @csrf
+
+                <input class="form-control" name="value" type="number" placeholder="Enter the amount" required min="1" />
+                <div class="w-100 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary mt-3">Withdraw</button>
+                </div>
+            </form>
         </section>
 
         <div class="overlay hidden" id="overlay-three"></div>

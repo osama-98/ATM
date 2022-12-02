@@ -22,8 +22,8 @@ class UsersController extends Controller
 
     public function deposit(Request $request)
     {
-        if (empty($request->value)) {
-            return redirect()->back()->with('message', 'The value is required');
+        if (empty($request->value) || $request->value <= 0) {
+            return redirect()->back()->with('error', 'The value is required');
         }
 
         Transaction::create([
@@ -32,11 +32,31 @@ class UsersController extends Controller
             'type' => TransactionType::Deposit
         ]);
 
-        return redirect()->back()->with('message', 'Deposit Success');
+        auth()->user()->balance += $request->value;
+        auth()->user()->save();
+
+        return redirect()->back()->with('success', 'Deposit Success');
     }
 
     public function withdraw(Request $request)
     {
+        if (empty($request->value) || $request->value <= 0) {
+            return redirect()->back()->with('error', 'The value is required');
+        }
 
+        if ($request->value > auth()->user()->balance) {
+            return redirect()->back()->with('error', 'Your balance is less than the amount');
+        }
+
+        Transaction::create([
+            'user_id' => auth()->id(),
+            'value' => $request->value,
+            'type' => TransactionType::Withdraw
+        ]);
+
+        auth()->user()->balance -= $request->value;
+        auth()->user()->save();
+
+        return redirect()->back()->with('success', 'Withdraw Success');
     }
 }
