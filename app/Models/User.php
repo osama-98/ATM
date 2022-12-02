@@ -54,7 +54,8 @@ class User extends Authenticatable
         'name',
         'username',
         'balance',
-        'password'
+        'password',
+        'status',
     ];
 
     public function transactions()
@@ -72,17 +73,17 @@ class User extends Authenticatable
         return $this->transactions()->where('transactions.type', TransactionType::Withdraw);
     }
 
-    public function isAdmin()
+    public function isAdmin(): bool
     {
         return $this->role == UserRole::Admin;
     }
 
-    public function isUser()
+    public function isUser(): bool
     {
         return $this->role == UserRole::User;
     }
 
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->status == UserStatus::Active;
     }

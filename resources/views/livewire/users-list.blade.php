@@ -7,6 +7,7 @@
                     <tr class="fw-bold fs-6 text-gray-800">
                         <th>Name</th>
                         <th>Username</th>
+                        <th>Active</th>
                         <th>Deposit Transactions</th>
                         <th>Withdraw Transactions</th>
                         <th>Actions</th>
