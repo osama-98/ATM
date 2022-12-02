@@ -48,10 +48,6 @@
                             </div>
                         </div>
                     </div>
-
-                    <div class="modal-footer border-0">
-
-                    </div>
                 </div>
             </div>
         </div>
