@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('username')->unique();
-            $table->double('balance', 16, 3);
+            $table->double('balance', 16, 3)->nullable();
             $table->string('password');
             $table->timestamps();
         });

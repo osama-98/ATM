@@ -14,3 +14,5 @@ Route::view('register', 'register')->name('register');
 
 Route::post('login', [AuthController::class, 'login'])->name('login.store');
 Route::post('register', [AuthController::class, 'register'])->name('register.store');
+
+Route::view('home', 'home')->name('home');
