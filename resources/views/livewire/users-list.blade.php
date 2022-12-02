@@ -15,7 +15,7 @@
                     </thead>
                     <tbody>
                     @if($users->total() == 0)
-                        <td colspan="4" class="text-center">There are no users.</td>
+                        <td colspan="5" class="text-center">There are no users.</td>
                     @else
                         @foreach($users as $user)
                             @livewire('users-list-item', ['user' => $user], key(microtime()))
