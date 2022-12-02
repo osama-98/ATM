@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -19,6 +20,7 @@ class UserFactory extends Factory
             'name' => 'Admin',
             'username' => 'osama_admin',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'status' => UserStatus::Active,
             'role' => UserRole::Admin
         ];
     }
