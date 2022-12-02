@@ -6,8 +6,10 @@
 
 namespace App\Models;
 
+use App\Enums\TransactionType;
 use App\Enums\UserRole;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,6 +28,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property Carbon|null $updated_at
  *
  * @property Collection|Transaction[] $transactions
+ *
+ * @method static Builder users()
  *
  * @package App\Models
  */
@@ -55,6 +59,16 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class);
     }
 
+    public function deposit_transactions()
+    {
+        return $this->transactions()->where('transactions.type', TransactionType::Deposit);
+    }
+
+    public function withdraw_transactions()
+    {
+        return $this->transactions()->where('transactions.type', TransactionType::Withdraw);
+    }
+
     public function isAdmin()
     {
         return $this->role == UserRole::Admin;
@@ -63,5 +77,18 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role == UserRole::User;
+    }
+
+    public function scopeUsers($query)
+    {
+        return $query->where('role', UserRole::User);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($user) {
+            $user->transactions()->delete();
+        });
     }
 }

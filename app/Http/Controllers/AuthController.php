@@ -12,8 +12,8 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            $default = auth()->user()->isAdmin() ? 'dashboard.home' : 'home';
-            return redirect()->intended($default);
+            $default = auth()->user()->isAdmin() ? 'admin.home' : 'home';
+            return redirect()->intended(route($default));
         }
 
         return redirect()->back()->withInput()->with('message', __('auth.failed'));
@@ -28,7 +28,12 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
-
         return redirect()->route('home');
+    }
+
+    public function logout()
+    {
+        auth()->logout();
+        return redirect()->route('login');
     }
 }
