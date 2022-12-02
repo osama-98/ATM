@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $request->validate([
-            'username' => ['required'],
-            'password' => ['required'],
-        ]);
-
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
-            return redirect()->route();
+            return redirect()->route('home');
         }
 
-        return redirect()->back()->withInput();
+        return redirect()->back()->withInput()->with('message', __('auth.failed'));
+    }
+
+    public function register(RegisterRequest $request)
+    {
+
     }
 }
