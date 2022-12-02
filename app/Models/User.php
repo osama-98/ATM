@@ -6,6 +6,7 @@
 
 namespace App\Models;
 
+use App\Enums\UserRole;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -32,25 +33,35 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-	protected $table = 'users';
+    protected $table = 'users';
 
-	protected $casts = [
-		'balance' => 'float'
-	];
+    protected $casts = [
+        'balance' => 'float'
+    ];
 
-	protected $hidden = [
-		'password'
-	];
+    protected $hidden = [
+        'password'
+    ];
 
-	protected $fillable = [
-		'name',
-		'username',
-		'balance',
-		'password'
-	];
+    protected $fillable = [
+        'name',
+        'username',
+        'balance',
+        'password'
+    ];
 
-	public function transactions()
-	{
-		return $this->hasMany(Transaction::class);
-	}
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role == UserRole::Admin;
+    }
+
+    public function isUser()
+    {
+        return $this->role == UserRole::User;
+    }
 }
