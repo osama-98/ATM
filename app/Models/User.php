@@ -18,10 +18,9 @@ use Laravel\Sanctum\HasApiTokens;
  *
  * @property int $id
  * @property string $name
- * @property string $email
- * @property Carbon|null $email_verified_at
+ * @property string $username
+ * @property float $balance
  * @property string $password
- * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *
@@ -35,21 +34,19 @@ class User extends Authenticatable
 
 	protected $table = 'users';
 
-	protected $dates = [
-		'email_verified_at'
+	protected $casts = [
+		'balance' => 'float'
 	];
 
 	protected $hidden = [
-		'password',
-		'remember_token'
+		'password'
 	];
 
 	protected $fillable = [
 		'name',
-		'email',
-		'email_verified_at',
-		'password',
-		'remember_token'
+		'username',
+		'balance',
+		'password'
 	];
 
 	public function transactions()
