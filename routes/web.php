@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 Route::view('/login', 'login')->name('login');
 Route::view('/register', 'register')->name('register');
+Route::view('/landing', 'landing')->name('landing');
+Route::view('/checkBalance', 'checkBalance')->name('checkBalance');
