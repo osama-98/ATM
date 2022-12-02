@@ -8,6 +8,9 @@
     <th>{{ $user['deposit_transactions_count'] }}</th>
     <th>{{ $user['withdraw_transactions_count'] }}</th>
     <th>
+        <a href="{{ route('users.edit', ['user' => $user['id']]) }}">
+            <i class="fs-4 fa-solid cursor-pointer fa-eye text-success me-3"></i>
+        </a>
         <i class="fs-4 fa-solid cursor-pointer fa-save text-info me-3" wire:click="save"></i>
         <i class="fs-4 fa-solid cursor-pointer fa-trash-alt text-danger" data-bs-toggle="modal" data-bs-target="#delete_user{{ $user['id'] }}"></i>
 
@@ -20,7 +23,8 @@
                                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="#fff">
                                     <g transform="translate(12.000000, 12.000000) rotate(-45.000000) translate(-12.000000, -12.000000) translate(4.000000, 4.000000)" fill="currentColor">
                                         <rect fill="currentColor" x="0" y="7" width="16" height="2" rx="1"></rect>
-                                        <rect fill="currentColor" x="0" y="7" width="16" height="2" rx="1" transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"></rect>
+                                        <rect fill="currentColor" x="0" y="7" width="16" height="2" rx="1"
+                                              transform="translate(8.000000, 8.000000) rotate(-270.000000) translate(-8.000000, -8.000000)"></rect>
                                     </g>
                                 </svg>
                             </label>

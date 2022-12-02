@@ -11,7 +11,7 @@ class UsersController extends Controller
 
     public function edit($id)
     {
-        return view('users.index', [
+        return view('users.edit', [
             'id' => $id
         ]);
     }
