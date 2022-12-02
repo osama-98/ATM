@@ -25,6 +25,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'user'])->group(function () {
     Route::view('home', 'home')->name('home');
+    Route::post('deposit', [UsersController::class, 'deposit'])->name('deposit');
+    Route::post('withdraw', [UsersController::class, 'withdraw'])->name('withdraw');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
