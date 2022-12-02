@@ -27,6 +27,12 @@
                     @endif
                     </tbody>
                 </table>
+
+                <div class="w-100 d-flex justify-content-end">
+                    @if(method_exists($transactions, 'links'))
+                        {!! $transactions->links() !!}
+                    @endif
+                </div>
             </div>
         </div>
     </div>

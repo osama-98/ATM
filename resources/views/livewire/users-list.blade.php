@@ -23,6 +23,12 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="w-100 d-flex justify-content-end">
+                @if(method_exists($users, 'links'))
+                    {!! $users->links() !!}
+                @endif
+            </div>
         </div>
     </div>
 </div>

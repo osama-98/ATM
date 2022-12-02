@@ -5,9 +5,13 @@ namespace App\Http\Livewire;
 use App\Models\Transaction;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserTransactions extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+
     public  $user;
 
     public function mount($user)
