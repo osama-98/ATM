@@ -24,11 +24,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">Register</a>
                             </li>
+                        @else
+                            <li class="nav-item">
+                                <form action="{{ route('logout') }}" method="POST" id="logout">
+                                    @csrf
+                                </form>
+                                <button class="btn nav-link" form="logout">Logout</button>
+                            </li>
                         @endguest
-
-                        {{-- <li class="nav-item">
-                    <a class="nav-link" href="#featured">Featured</a>
-                  </li> --}}
                     </ul>
 
                 </div>

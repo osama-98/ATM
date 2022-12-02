@@ -9,7 +9,7 @@ class UserMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->check() || !auth()->user()->isUser()) {
+        if (!auth()->check() || !auth()->user()->isUser() || !auth()->user()->isActive()) {
             abort(404);
         }
 

@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsersController;
-use App\Http\Livewire\UsersList;
 use Illuminate\Support\Facades\Route;
 
 /*

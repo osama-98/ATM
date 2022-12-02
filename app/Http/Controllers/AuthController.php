@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserStatus;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -11,7 +12,7 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request)
     {
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password, 'status' => UserStatus::Active])) {
             $default = auth()->user()->isAdmin() ? 'admin.home' : 'home';
             return redirect()->intended(route($default));
         }

@@ -8,6 +8,7 @@ namespace App\Models;
 
 use App\Enums\TransactionType;
 use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -22,6 +23,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property int $id
  * @property string $name
  * @property string $username
+ * @property string $role
+ * @property string $status
  * @property float $balance
  * @property string $password
  * @property Carbon|null $created_at
@@ -77,6 +80,11 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->role == UserRole::User;
+    }
+
+    public function isActive()
+    {
+        return $this->status == UserStatus::Active;
     }
 
     public function scopeUsers($query)
