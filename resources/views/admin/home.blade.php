@@ -101,14 +101,8 @@
                      style="background-position: 100% 50%; background-image:url('/metronic8/demo1/assets/media/stock/900x600/42.png')">
                     <div class="mb-10">
                         <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
-                            <span class="me-2">Try our all new Enviroment with
-                                <br />
-                                <span class="position-relative d-inline-block text-danger">
-                                    <a href="/" class="text-danger opacity-75-hover">Pro Plan</a>
-                                    <span class="position-absolute opacity-15 bottom-0 start-0 border-4 border-danger border-bottom w-100"></span>
-                                </span>
+                            <span class="me-2">Automatic Teller Machine
                             </span>
-                            for Free
                         </div>
                     </div>
                 </div>
