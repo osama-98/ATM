@@ -1,256 +1,112 @@
-@extends('layouts.app')
-
-@section('title', 'Home')
+@extends('layouts.dashboard')
 
 @section('content')
-    <div class="nav-bar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">ATM</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
-                        </li>
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">Login</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">Register</a>
-                            </li>
-                        @else
-                            <li class="nav-item">
-                                <form action="{{ route('logout') }}" method="POST" id="logout">
-                                    @csrf
-                                </form>
-                                <button class="btn nav-link" form="logout">Logout</button>
-                            </li>
-                        @endguest
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
-    </div>
-
-    <div class="hero-container" id="hero-sec">
-        <div class="container-fluid">
-            <div class="row d-flex">
-                <div class="col align-middle">
-                    <div class="px-2 py-2">
-                        <img
-                            src="https://img.freepik.com/free-vector/bank-worker-helping-customers-use-atm-girl-with-credit-card-having-question-flat-vector-illustration-finance-service-consultation_74855-13016.jpg?w=740&t=st=1669995177~exp=1669995777~hmac=1edd6c2c7dff8ddda7465ab2deb0c8f9278e5d3ca4e92eddbc0e4faa4d03f405"
-                            class="img-fluid" alt="...">
+    <div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+        <!--begin::Col-->
+        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 ">
+            <div class="card card-flush h-100 bgi-no-repeat bgi-size-contain bgi-position-x-end "
+                 style="background-color: #F1416C;background-image:url('/metronic8/demo1/assets/media/patterns/vector-1.png')">
+                <!--begin::Header-->
+                <div class="card-header pt-5">
+                    <!--begin::Title-->
+                    <div class="card-title d-flex flex-column">
+                        <!--begin::Amount-->
+                        <span class="fs-2hx fw-bold text-white me-2 lh-1 ls-n2">
+                                        {{ \App\Models\User::users()->count() }}
+                                    </span>
+                        <!--end::Amount-->
+                        <!--begin::Subtitle-->
+                        <span class="text-white opacity-75 pt-1 fw-semibold fs-6">Users</span>
+                        <!--end::Subtitle-->
                     </div>
+                    <!--end::Title-->
                 </div>
-                <div class="col">
-                    <div class="px-5 py-5 mt-5">
-                        <div class="px-2 py-2 align-middle">
-                            <h4>Welcome {{ auth()->user()->name }}</h4>
-
-                            <p> ATMs are convenient, allowing consumers to perform quick self-service transactions such
-                                as deposits, cash withdrawals, bill payments, and transfers between accounts.</p>
+                <!--end::Header-->
+                <!--begin::Card body-->
+                <div class="card-body d-flex align-items-end pt-0">
+                    <!--begin::Progress-->
+                    <div class="d-flex align-items-center flex-column mt-3 w-100">
+                        <a href="{{ route('users.index') }}" class="d-flex justify-content-between fw-bold fs-6 text-white opacity-75 w-100 mt-auto mb-2">
+                            <span>Preview</span>
+                        </a>
+                    </div>
+                    <!--end::Progress-->
+                </div>
+                <!--end::Card body-->
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3">
+            <div class="card card-flush h-100">
+                <!--begin::Header-->
+                <div class="card-header pt-5">
+                    <!--begin::Title-->
+                    <div class="card-title d-flex flex-column">
+                        <!--begin::Info-->
+                        <div class="d-flex align-items-center">
+                            <span class="fs-2hx fw-bold text-dark me-2 lh-1 ls-n2">
+                                {{ \App\Models\Transaction::count() }}
+                            </span>
                         </div>
-                        <div class="px-2 py-2">
-                            <button type="button" class="btn btn-outline-primary btn-open" id="check-btn">Check
-                                Balance
-                            </button>
-                            <button type="button" class="btn btn-outline-primary " id="deposit-btn">Deposit</button>
-                            <button type="button" class="btn btn-outline-primary Withdraw-open"
-                                    id="withdraw-btn">Withdraw
-                            </button>
+                        <!--end::Info-->
+                        <!--begin::Subtitle-->
+                        <span class="text-gray-400 pt-1 fw-semibold fs-6">Transactions</span>
+                        <!--end::Subtitle-->
+                    </div>
+                    <!--end::Title-->
+                </div>
+                <!--end::Header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-2 pb-4 d-flex flex-wrap align-items-center">
+                    <!--begin::Labels-->
+                    <div class="d-flex flex-column content-justify-center flex-row-fluid">
+                        <!--begin::Label-->
+                        <div class="d-flex fw-semibold align-items-center">
+                            <!--begin::Bullet-->
+                            <div class="bullet w-8px h-3px rounded-2 bg-success me-3"></div>
+                            <!--end::Bullet-->
+                            <!--begin::Label-->
+                            <div class="text-gray-500 flex-grow-1 me-4">Deposit Transactions</div>
+                            <!--end::Label-->
+                            <!--begin::Stats-->
+                            <div class="fw-bolder text-gray-700 text-xxl-end">
+                                {{ \App\Models\Transaction::deposit()->count() }}
+                            </div>
+                            <!--end::Stats-->
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Label-->
+                        <div class="d-flex fw-semibold align-items-center my-3">
+                            <!--begin::Bullet-->
+                            <div class="bullet w-8px h-3px rounded-2 bg-primary me-3"></div>
+                            <!--end::Bullet-->
+                            <!--begin::Label-->
+                            <div class="text-gray-500 flex-grow-1 me-4">Withdraw Transactions</div>
+                            <!--end::Label-->
+                            <!--begin::Stats-->
+                            <div class="fw-bolder text-gray-700 text-xxl-end">
+                                {{ \App\Models\Transaction::withdraw()->count() }}
+                            </div>
+                            <!--end::Stats-->
                         </div>
                     </div>
+                    <!--end::Labels-->
                 </div>
+                <!--end::Card body-->
             </div>
-
-            <div class="row d-flex">
-                <div class="col-12">
-                    @if(session()->has('success'))
-                        <div class="alert alert-primary w-100" role="alert">
-                            {{ session('success') }}
+        </div>
+        <div class="col-xxl-6">
+            <div class="card card-flush h-100">
+                <!--begin::Body-->
+                <div class="card-body d-flex flex-column justify-content-between mt-9 bgi-no-repeat bgi-size-cover bgi-position-x-center pb-0"
+                     style="background-position: 100% 50%; background-image:url('/metronic8/demo1/assets/media/stock/900x600/42.png')">
+                    <div class="mb-10">
+                        <div class="fs-2hx fw-bold text-gray-800 text-center mb-13">
+                            <span class="me-2">Automatic Teller Machine
+                            </span>
                         </div>
-                    @elseif(session()->has('error'))
-                        <div class="alert alert-danger w-100" role="alert">
-                            {{ session('error') }}
-                        </div>
-                    @endif
+                    </div>
                 </div>
             </div>
         </div>
-
-        {{-- Check Balanc Modal --}}
-        <section class="modal hidden" id="modalOne">
-            <div>
-                <button class="btn bg-success bg-gradient btn-sm rounded-circle" id="check-close">
-                    <i class="fa-solid fa-times m-2"></i>
-                </button>
-            </div>
-            <div>
-                <h3>Your Balance</h3>
-                <p class="text-center">
-                    {{ number_format(auth()->user()->balance) }} JD
-                </p>
-            </div>
-        </section>
-
-        <div class="overlay hidden" id="overlay-one"></div>
-
-        {{-- Check Balanc Modal --}}
-
-        {{-- Deposit Modal --}}
-        <section class="modal hidden" id="modalTwo">
-            <div>
-                <button class="btn bg-success bg-gradient btn-sm rounded-circle" id="deposit-close">
-                    <i class="fa-solid fa-times m-2"></i>
-                </button>
-            </div>
-
-            <div>
-                <h3>Deposit</h3>
-            </div>
-
-            <form action="{{ route('deposit') }}" method="POST">
-                @csrf
-
-                <input class="form-control" name="value" type="number" placeholder="Enter the amount" required min="1" />
-                <div class="w-100 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-primary mt-3">Deposit</button>
-                </div>
-            </form>
-        </section>
-
-        <div class="overlay hidden" id="overlay-two"></div>
-
-        {{-- Deposit Modal --}}
-
-        {{-- Withdraw Modal --}}
-        <section class="modal hidden" id="modalThree">
-            <div>
-                <button class="btn bg-success bg-gradient btn-sm rounded-circle" id="withdraw-close">
-                    <i class="fa-solid fa-times m-2"></i>
-                </button>
-            </div>
-
-            <div>
-                <h3>Withdraw</h3>
-            </div>
-
-            <form action="{{ route('withdraw') }}" method="POST">
-                @csrf
-
-                <input class="form-control" name="value" type="number" placeholder="Enter the amount" required min="1" />
-                <div class="w-100 d-flex justify-content-center">
-                    <button type="submit" class="btn btn-outline-primary mt-3">Withdraw</button>
-                </div>
-            </form>
-        </section>
-
-        <div class="overlay hidden" id="overlay-three"></div>
-        {{-- <button class="btn btn-open">Open Modal</button> --}}
-
-        {{-- Withdraw Modal --}}
-
-        <script>
-            // Check Balanc Modal
-            const modal = document.querySelector("#modalOne");
-            const overlay = document.querySelector("#overlay-one");
-            const openModalBtn = document.querySelector("#check-btn");
-            const closeModalBtn = document.querySelector("#check-close");
-
-            // close modal function
-            const closeModal = function () {
-                modal.classList.add("hidden");
-                overlay.classList.add("hidden");
-            };
-
-            // close the modal when the close button and overlay is clicked
-            closeModalBtn.addEventListener("click", closeModal);
-            overlay.addEventListener("click", closeModal);
-
-            // close modal when the Esc key is pressed
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape" && !modal.classList.contains("hidden")) {
-                    closeModal();
-                }
-            });
-
-            // open modal function
-            const openModal = function () {
-                modal.classList.remove("hidden");
-                overlay.classList.remove("hidden");
-            };
-            // open modal event
-            openModalBtn.addEventListener("click", openModal);
-            // Check Balanc Modal
-
-            // Deposit Modal
-            const modal_two = document.querySelector("#modalTwo");
-            const overlay_two = document.querySelector("#overlay-two");
-            const openModalBtn_two = document.querySelector("#deposit-btn");
-            const closeModalBtn_two = document.querySelector("#deposit-close");
-
-            // close modal function
-            const closeModalTwo = function () {
-                modal_two.classList.add("hidden");
-                overlay_two.classList.add("hidden");
-            };
-
-            // close the modal when the close button and overlay is clicked
-            closeModalBtn_two.addEventListener("click", closeModalTwo);
-            overlay_two.addEventListener("click", closeModalTwo);
-
-            // close modal when the Esc key is pressed
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape" && !modal_two.classList.contains("hidden")) {
-                    closeModalTwo();
-                }
-            });
-
-            // open modal function
-            const openModalTwo = function () {
-                modal_two.classList.remove("hidden");
-                overlay_two.classList.remove("hidden");
-            };
-            // open modal event
-            openModalBtn_two.addEventListener("click", openModalTwo);
-
-
-            // Withdraw Modal
-            const modal_three = document.querySelector("#modalThree");
-            const overlay_three = document.querySelector("#overlay-three");
-            const openModalBtn_three = document.querySelector("#withdraw-btn");
-            const closeModalBtn_three = document.querySelector("#withdraw-close");
-
-            // close modal function
-            const closeModalThree = function () {
-                modal_three.classList.add("hidden");
-                overlay_three.classList.add("hidden");
-            };
-
-            // close the modal when the close button and overlay is clicked
-            closeModalBtn_three.addEventListener("click", closeModalThree);
-            overlay_three.addEventListener("click", closeModalThree);
-
-            // close modal when the Esc key is pressed
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Escape" && !modal_three.classList.contains("hidden")) {
-                    closeModalThree();
-                }
-            });
-
-            // open modal function
-            const openModalThree = function () {
-                modal_three.classList.remove("hidden");
-                overlay_three.classList.remove("hidden");
-            };
-            // open modal event
-            openModalBtn_three.addEventListener("click", openModalThree);
-        </script>
+    </div>
 @endsection

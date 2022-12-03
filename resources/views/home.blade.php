@@ -52,7 +52,7 @@
                 <div class="col">
                     <div class="px-5 py-5 mt-5">
                         <div class="px-2 py-2 align-middle">
-                            <h4>Welcome Osama</h4>
+                            <h4>Welcome {{ auth()->user()->name }}</h4>
 
                             <p> ATMs are convenient, allowing consumers to perform quick self-service transactions such
                                 as deposits, cash withdrawals, bill payments, and transfers between accounts.</p>
