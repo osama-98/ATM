@@ -4,10 +4,11 @@
             <div class="table-responsive bg-white p-5">
                 <table class="table table-row-dashed table-row-gray-300 gy-7">
                     <thead>
-                    <tr class="fw-bold fs-6 text-gray-800">
+                    <tr class="fw-bold fs-6 text-gray-800 text-center">
                         <th>Name</th>
                         <th>Username</th>
                         <th>Active</th>
+                        <th>Balance</th>
                         <th>Deposit Transactions</th>
                         <th>Withdraw Transactions</th>
                         <th>Actions</th>

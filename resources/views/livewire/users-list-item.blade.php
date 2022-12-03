@@ -1,15 +1,16 @@
-<tr>
+<tr class="text-center">
     <th>
-        <input class="form-control mw-300px" type="text" wire:model.defer="user.name">
+        <input class="form-control mw-200px" type="text" wire:model.defer="user.name">
     </th>
     <th>
-        <input class="form-control mw-300px" type="text" wire:model.defer="user.username">
+        <input class="form-control mw-200px" type="text" wire:model.defer="user.username">
     </th>
     <th>
         <div class="form-check form-switch form-check-custom form-check-solid">
             <input class="form-check-input" type="checkbox" wire:model.defer="active" />
         </div>
     </th>
+    <th>{{ number_format($user['balance'], 2) }} JD</th>
     <th>{{ $user['deposit_transactions_count'] }}</th>
     <th>{{ $user['withdraw_transactions_count'] }}</th>
     <th>
